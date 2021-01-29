@@ -1,20 +1,16 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', () => {
 
-    let money = 30000,
-        income = 'распил',
-        addExpenses = 'Интернет, Мобильный, Бензин' ,
-        deposit = true,
-        mission = 500000,
-        period = 12;
+    let num = 266219,
+    sum = 1,
+    newSam;
+    num = num.toString();
 
-    console.log(typeof money);
-    console.log(typeof income);
-    console.log(typeof deposit);
-    console.log(addExpenses.length);
-    console.log(`Период равен ${period} месяцев`);
-    addExpenses = addExpenses.toLowerCase().split(', ');
-    console.log('массив addExpenses: ', addExpenses);
-    let budgetDay = money / 30;
-    console.log('budgetDay: ', budgetDay);
+    for(let i = 0; i < num.length; i++ ){
+        sum = sum * num[i];
+    }
+
+    sum = sum ** 3;
+    newSam = sum.toString();
+    console.log(newSam[0] + newSam[1]);
 });
