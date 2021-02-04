@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     budgetMonth = money - amount1 - amount2;
     console.log('budgetMonth: ', budgetMonth);
 
-    budgetDay = budgetMonth / 30;
+    budgetDay = Math.floor(budgetMonth / 30);
 
     period = Math.ceil(mission / budgetMonth);
 
