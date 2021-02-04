@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('getExpensesMonth: ', getExpensesMonth());
     console.log('addExpenses: ', addExpenses);
-    console.log('budgetDay: ', budgetDay);
     console.log('getTargetMonth: ', getTargetMonth());
+    console.log('budgetDay: ', budgetDay);
 
     const getStatusIncome = () => {
         if(budgetDay >= 1200){
