@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     money = +prompt('Ваш месячный доход?' , 30000);
     addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую' , 'Интернет, Мобильный ');
-    deposit = prompt('Есть ли у вас депозит в банке?' , true);
+    deposit = confirm('Есть ли у вас депозит в банке?');
     expenses1 = prompt('Введите обязательную статью расходов 1 ?', 'квартплата');
     amount1 = +prompt('Во сколько это обойдется 1 ?', 3000);
     expenses2 = prompt('Введите обязательную статью расходов 2 ?', 'Бензин');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addExpenses = addExpenses.toLowerCase().split(', ');
     console.log('addExpenses: ', addExpenses);
-    
+
     const showTypeOf = data => {
         console.log( data , typeof data);
     };
