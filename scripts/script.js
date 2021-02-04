@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     amount2 = +prompt('Во сколько это обойдется 2 ?', 2000);
 
     addExpenses = addExpenses.toLowerCase().split(', ');
-    console.log('addExpenses: ', addExpenses);
 
     const showTypeOf = data => {
         console.log( data , typeof data);
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const getExpensesMonth = () => {
         return amount1 + amount2;
     };
-    console.log('getExpensesMonth: ', getExpensesMonth());
 
     const getAccumulatedMonth = () => {
         return money - amount1 - amount2;
@@ -44,11 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
     accumulatedMonth = getAccumulatedMonth();
 
     budgetDay = Math.floor(accumulatedMonth / 30);
-    console.log('budgetDay: ', budgetDay);
 
     const getTargetMonth = () => {
        return Math.ceil(mission / accumulatedMonth);
     };
+
+    console.log('getExpensesMonth: ', getExpensesMonth());
+    console.log('addExpenses: ', addExpenses);
+    console.log('budgetDay: ', budgetDay);
     console.log('getTargetMonth: ', getTargetMonth());
 
     const getStatusIncome = () => {
