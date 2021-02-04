@@ -1,55 +1,83 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', () => {
 
+    let isNamber = n => {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    };
+
     let money ,                 //“Доход за месяц”
         income = 'распил',      // дополнительныq доход
         addExpenses,            //дополнительныt расходы через запятую
         deposit ,               //Есть ли у вас депозит в банке?
         mission = 500000,       //Какую сумму хотите накопить
-        expenses1,              //Введите обязательную статью расходов?
-        expenses2,              //Введите обязательную статью расходов?
-        amount1,                //Во сколько это обойдется?
-        amount2,                //Во сколько это обойдется?
+        expensesI = ['квартплата' , 'Бензин'],
+        expenses = [],          //Введите обязательную статью расходов?
+        amount = [3000 , 2000],
+        amount1 = [],
         budgetDay,              //дневной бюджет
-        accumulatedMonth;       //Накопления за месяц (Доходы минус расходы)
+        accumulatedMonth,
+        expensesAmount,
+        start,
+        getTargetM;       //Накопления за месяц (Доходы минус расходы)
 
-    money = +prompt('Ваш месячный доход?' , 30000);
+    start = () => {
+
+        do{
+            money = prompt('Ваш месячный доход?');
+        }while(!isNamber(money));
+    };
+
+    start();
+    
     addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую' , 'Интернет, Мобильный ');
     deposit = confirm('Есть ли у вас депозит в банке?');
-    expenses1 = prompt('Введите обязательную статью расходов 1 ?', 'квартплата');
-    amount1 = +prompt('Во сколько это обойдется 1 ?', 3000);
-    expenses2 = prompt('Введите обязательную статью расходов 2 ?', 'Бензин');
-    amount2 = +prompt('Во сколько это обойдется 2 ?', 2000);
-
     addExpenses = addExpenses.toLowerCase().split(', ');
 
     const showTypeOf = data => {
         console.log( data , typeof data);
     };
     
-    showTypeOf(money);
-    showTypeOf(income);
-    showTypeOf(deposit);
-
     const getExpensesMonth = () => {
-        return amount1 + amount2;
+        let sum = 0;
+
+        for (let i = 0; i < 2; i++){
+
+            expenses[i] = prompt(`Введите обязательную статью расходов ${i+1} ?`, expensesI[i]);
+            do{
+                amount1[i] = prompt(`Во сколько это обойдется ${i+1}?`, amount[i]);
+            }while(!isNamber(amount1[i]));
+            sum += +amount1[i];
+        }
+        return sum;
     };
 
+    expensesAmount = getExpensesMonth();
+
     const getAccumulatedMonth = () => {
-        return money - amount1 - amount2;
+        return money - expensesAmount;
     };
 
     accumulatedMonth = getAccumulatedMonth();
 
     budgetDay = Math.floor(accumulatedMonth / 30);
-
+    
     const getTargetMonth = () => {
        return Math.ceil(mission / accumulatedMonth);
     };
 
-    console.log('getExpensesMonth: ', getExpensesMonth());
+    getTargetM = getTargetMonth();
+
+    showTypeOf(money);
+    showTypeOf(income);
+    showTypeOf(deposit);
+    console.log('expenses: ', expenses);
+    console.log('expensesAmount: ', expensesAmount);
     console.log('addExpenses: ', addExpenses);
-    console.log('getTargetMonth: ', getTargetMonth());
+    if(getTargetM > 0){
+        console.log(`Цель будет достигнута через ${getTargetM} месяцев(месяца)`);
+    }else{
+        console.log('Цель не будет достигнута');
+    }
     console.log('budgetDay: ', budgetDay);
 
     const getStatusIncome = () => {
