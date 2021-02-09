@@ -32,8 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
              'Интернет, Мобильный ').toLowerCase().split(', ');
                 appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
-                let amount1 = [],
-                amount = [3000 , 2000],
+                let amount = [3000 , 2000],
                 expensesI = ['квартплата' , 'Бензин'],
                 expenses = [];
 
