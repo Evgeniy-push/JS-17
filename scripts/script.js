@@ -88,6 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }else{
         console.log('Цель не будет достигнута');
     }
+
+    console.log("Наша программа включает в себя данные: ");
+
+    for (let app in appData){
+        console.log(`${app} : `, `${appData[app]}`);
+    }
     
     appData.getStatusIncome();
 
