@@ -45,10 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+            let addExpenses;
+            do {addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую' ,
+             'интернет, мОбильный, гАраж ');
+            }while (((typeof addExpenses) === 'string' && isNumber(addExpenses)) || addExpenses === null);
+            addExpenses = addExpenses.toLowerCase().split(',');
 
-            appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую' ,
-             'интернет, мОбильный, гАраж ').toLowerCase().split(', ');
-            
+            addExpenses.map(item => {
+                appData.addExpenses.push(item.trim());
+            });
+
             appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
             let amount = [3000 , 2000],
@@ -57,10 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             for (let i = 0; i < 2; i++){
 
-                do {expenses[i] = prompt(`Введите обязательную статью расходов ${i+1} ?`, expensesI[i]).trim();
-                }while (((typeof expenses[i]) === 'string' && isNumber(expenses[i])) || expenses[i] === '');
+                do {expenses[i] = prompt(`Введите обязательную статью расходов ${i+1} ?`, expensesI[i]);
+                console.log('expenses[i]: ', expenses[i]);
+                }while (((typeof expenses[i]) === 'string' && isNumber(expenses[i])) || expenses[i] === null || expenses[i] === '');
                 
-                do{appData.expenses[expenses[i]] = +prompt(`Во сколько это обойдется (${expenses[i]}) ${i+1}?`, amount[i]);
+                do{appData.expenses[expenses[i]] = +prompt(`Во сколько это обойдется (${expenses[i]}) ?`, amount[i]);
                 }while(!isNumber(appData.expenses[expenses[i]]) || appData.expenses[expenses[i]] === 0);
             }
         },
