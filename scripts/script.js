@@ -1,7 +1,7 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', () => {
 
-    let isNamber = n => {
+    let isNumber = n => {
         return !isNaN(parseFloat(n)) && isFinite(n);
     };
 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         start = () => {
             do{
                 money = prompt('Ваш месячный доход?');
-            }while(!isNamber(money));
+            }while(!isNumber(money));
         };
 
     start();
@@ -21,27 +21,47 @@ document.addEventListener('DOMContentLoaded', () => {
         expenses: {},
         addExpenses: [],
         deposit: false,
+        percentDeposit:0,
+        moneyDeposit: 0,
         mission: 500000,
-        period: 0,
+        period: 3,
         budgetDay: 0,
         budgetMonth: 0,
         expensesMonth: 0,
 
         asking: () => {
-            appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую' ,
-             'Интернет, Мобильный ').toLowerCase().split(', ');
-                appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
-                let amount = [3000 , 2000],
-                expensesI = ['квартплата' , 'Бензин'],
-                expenses = [];
+            if (confirm('Есть ли у вас дополнительный источник заработка?')){
+                let itemIncome,
+                    cashIncome;
+                do {itemIncome = prompt('Какой у вас дополнительный заработок', "Таксую");
+                }while ((typeof itemIncome) === 'string' && isNumber(itemIncome));
+
+                do {cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
+                }while (!isNumber(cashIncome));
+
+                appData.income[itemIncome]=cashIncome;
+            }
+
+
+
+
+            appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую' ,
+             'интернет, мОбильный, гАраж ').toLowerCase().split(', ');
+            
+            appData.deposit = confirm('Есть ли у вас депозит в банке?');
+
+            let amount = [3000 , 2000],
+            expensesI = ['квартплата' , 'бензин'],
+            expenses = [];
 
             for (let i = 0; i < 2; i++){
 
-                expenses[i] = prompt(`Введите обязательную статью расходов ${i+1} ?`, expensesI[i]);
-                do{
-                    appData.expenses[expenses[i]] = +prompt(`Во сколько это обойдется ${i+1}?`, amount[i]);
-                }while(!isNamber(appData.expenses[expenses[i]]));
+                do {expenses[i] = prompt(`Введите обязательную статью расходов ${i+1} ?`, expensesI[i]).trim();
+                }while (((typeof expenses[i]) === 'string' && isNumber(expenses[i])) || expenses[i] === '');
+                
+                do{appData.expenses[expenses[i]] = +prompt(`Во сколько это обойдется (${expenses[i]}) ${i+1}?`, amount[i]);
+                }while(!isNumber(appData.expenses[expenses[i]]) || appData.expenses[expenses[i]] === 0);
             }
         },
 
@@ -70,6 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Что то пошло не так');
             }
         },
+        getInfoDeposit: () => {
+            
+            if(appData.deposit){
+
+                do{appData.percentDeposit = +prompt('Какой годовой процент?', 10);
+                }while(!isNumber(appData.percentDeposit) || appData.percentDeposit === 0);
+
+                do{appData.moneyDeposit = +prompt('Какая сумма заложена?', 200000);
+                }while(!isNumber(appData.moneyDeposit) || appData.moneyDeposit === 0);
+            }
+        },
+        calcSaveDeposit: () => {
+            return appData.budgetMonth * appData.period;
+        },
     };
 
     appData.asking();
@@ -96,5 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     appData.getStatusIncome();
+
+    appData.getInfoDeposit();
+    console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSaveDeposit());
+
+    console.log('appData.addExpenses.reduce1 :', appData.addExpenses.reduce((accum, elemArr, i) => {
+        if(i === appData.addExpenses.length - 1) {
+            return accum += elemArr[0].toUpperCase() + elemArr.slice(1).toLowerCase();
+        }
+            return accum += elemArr[0].toUpperCase() + elemArr.slice(1).toLowerCase() + ', ';
+    }, ''));
 
 });
