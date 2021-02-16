@@ -1,50 +1,45 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', () => {
 
-    const   startB = document.getElementById('start'),
-            plus = document.querySelectorAll('button'),
-            incPlus = plus[0],
-            extensPlus = plus[1],
-            check = document.querySelector('#deposit-check'),
-            income = document.querySelectorAll('.additional_income-item'),
-            
-            budgetM = document.getElementsByClassName('budget_month-value')[0],
-            budgetD = document.getElementsByClassName('budget_day-value')[0],
-            expensesM = document.getElementsByClassName('expenses_month-value')[0],
-            additionalI = document.getElementsByClassName('additional_income-value')[0],
-            additionalE = document.getElementsByClassName('additional_expenses-value')[0],
-            incomeP = document.getElementsByClassName('income_period-value')[0],
-            targetM = document.getElementsByClassName('target_month-value')[0],
-            
-            incomT = document.querySelector('input.income-title'),
-            incomA = document.querySelector('input.income-amount'),
-            expensesT = document.querySelector('input.expenses-title'),
-            expensesA = document.querySelector('input.expenses-amount'),
-            targetAmount = document.querySelector('.target-amount'),
-            periodSelect = document.querySelector('.period-select'),
-            periodAmount = document.querySelector('.period-amount');
+    let     adv = document.querySelector('.adv'),
+            body = document.querySelector('body'),
+            books = document.querySelector('.books'),
+            book = document.querySelectorAll('.book'),
+            book4A = book[4].querySelector('a'),
+            book2Ul = book[0].querySelector('ul'),
+            book2Li = book[0].querySelectorAll('li'),
+            book5Ul = book[5].querySelector('ul'),
+            book5Li = book[5].querySelectorAll('li'),
+            book6Ul = book[2].querySelector('ul'),
+            book6Li = book[2].querySelectorAll('li'),
+            newLi = document.createElement('li');
 
-            console.log('startB: ', startB);
-            console.log('plus: ', plus);
-            console.log('incPlus: ', incPlus);
-            console.log('extensPlus: ', extensPlus);
-            console.log('check: ', check);
-            console.log('income: ', income);
+            console.log('adv: ', adv);
+            console.log('body: ', body);
+            console.log('books: ', books);
+            console.log('book: ', book);
+            console.log('book4A: ', book4A);
+            console.log('book2Ul: ', book2Ul);
+            console.log('book2Li: ', book2Li);
+            console.log('book5Ul: ', book5Ul);
+            console.log('book5Li: ', book5Li);
+            console.log('book6Ul: ', book6Ul);
+            console.log('book6Li: ', book6Li);
+            console.log('newLi: ', newLi);
 
-            console.log('budgetM: ', budgetM);
-            console.log('budgetD: ', budgetD);
-            console.log('expensesM: ', expensesM);
-            console.log('additionalI: ', additionalI);
-            console.log('additionalE: ', additionalE);
-            console.log('incomeP: ', incomeP);
-            console.log('targetM: ', targetM);
+            adv.style.display = 'none';
+            books.append(book[2]);
+            book[0].before(book[1]);
+            book[3].before(book[4]);
+            body.style.backgroundImage = 'url("./image/you-dont-know-js.jpg")';
+            book4A.innerText = 'Книга 3. this и Прототипы Объектов';
+            book2Li[4].before(book2Li[6]);
+            book2Li[10].before(book2Li[2]);
+            book2Li[4].before(book2Li[8]);
+            book5Li[2].before(book5Li[9]);
+            book5Li[6].before(book5Li[2]);
+            book5Li[8].before(book5Li[5]);
+            newLi.textContent = 'Глава 8: За пределами ES6';
+            book6Li[9].before(newLi);
 
-            console.log('incomT: ', incomT);
-            console.log('incomA: ', incomA);
-            console.log('expensesT: ', expensesT);
-            console.log('expensesA: ', expensesA);
-            console.log('targetAmount: ', targetAmount);
-            console.log('periodSelect: ', periodSelect);
-            console.log('periodAmount: ', periodAmount);
- 
 });
